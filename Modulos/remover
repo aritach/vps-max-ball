@@ -19,16 +19,16 @@ chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 [[ ! -e /usr/lib/vpsmanager ]] && rm -rf /bin/ > /dev/null 2>&1
 database="/root/usuarios.db"
 clear
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ㅤ🐉ㅤ🚮ㅤRemove SSH Userㅤ🚮ㅤ🐉ㅤ" ; tput sgr0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ㅤ🐉ㅤ🚮ㅤลบ SSH Userㅤ🚮ㅤ🐉ㅤ" ; tput sgr0
 echo ""
-echo -e "\033[1;31m[\033[1;36m1\033[1;31m]\033[1;33m REMOVE A USER"
-echo -e "\033[1;31m[\033[1;36m2\033[1;31m]\033[1;33m REMOVE ALL USERS"
-echo -e "\033[1;31m[\033[1;36m3\033[1;31m]\033[1;33m COME BACK"
+echo -e "\033[1;31m[\033[1;36m1\033[1;31m]\033[1;33m ลบ ยูสเซอร์"
+echo -e "\033[1;31m[\033[1;36m2\033[1;31m]\033[1;33m ลบ ยูสเซอร์ ทั้งหมด"
+echo -e "\033[1;31m[\033[1;36m3\033[1;31m]\033[1;33m ย้อนกลับ"
 echo ""
 read -p "$(echo -e "\033[1;32m◇ WHAT DO YOU WANT TO DO\033[1;31m ?\033[1;37m : ")" -e -i 1 resp
 if [[ "$resp" = "1" ]]; then
 clear
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ㅤ🐉ㅤ🚮ㅤRemove SSH Userㅤ🚮ㅤ🐉ㅤ" ; tput sgr0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ㅤ🐉ㅤ🚮ㅤลบ SSH Userㅤ🚮ㅤ🐉ㅤ" ; tput sgr0
 echo ""
 echo -e "\033[1;33m◇ LIST OF USERS: \033[0m"
 echo""
@@ -57,7 +57,7 @@ else
 		echo ""
 		pkill -f "$user" > /dev/null 2>&1
 		deluser --force $user > /dev/null 2>&1
-		echo -e "\E[41;1;37m◇ User $user successfully removed! \E[0m"
+		echo -e "\E[41;1;37m◇ User $user ลบ เรียบร้อยแล้ว! \E[0m"
 		grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 		rm /etc/VPSManager/senha/$user 1>/dev/null 2>/dev/null
 		if [[ -e /etc/openvpn/server.conf ]]; then
@@ -69,7 +69,7 @@ else
 		if [[ `grep -c $user /tmp/rem` -eq 0 ]]; then
 			deluser --force $user > /dev/null 2>&1
 			echo ""
-			echo -e "\E[41;1;37m◇ User $user successfully removed! \E[0m"
+			echo -e "\E[41;1;37m◇ User $user ลบเรียบร้อยแล้ว! \E[0m"
 			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 			rm /etc/VPSManager/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
@@ -81,7 +81,7 @@ else
 			tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "◇ User logged in. Disconnecting..." ; tput sgr0
 			pkill -f "$user" > /dev/null 2>&1
 			deluser --force $user > /dev/null 2>&1
-			echo -e "\E[41;1;37m◇ User $user successfully removed! \E[0m"
+			echo -e "\E[41;1;37m◇ User $user ลบเรียบร้อยแล้ว! \E[0m"
 			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 			rm /etc/VPSManager/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
@@ -95,11 +95,11 @@ else
 fi
 elif [[ "$resp" = "2" ]]; then
 	clear
-	tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ㅤ🐉ㅤ🚮ㅤRemove SSH Userㅤ🚮ㅤ🐉ㅤ" ; tput sgr0
+	tput setaf 7 ; tput setab 4 ; tput bold ; printf '%32s%s%-13s\n' "ㅤ🐉ㅤ🚮ㅤลบ SSH Userㅤ🚮ㅤ🐉ㅤ" ; tput sgr0
 	echo ""
 	echo -ne "\033[1;33m◇ YOU REALLY WANT TO REMOVE ALL USERS \033[1;37m[s/n]: "; read opc	
 	if [[ "$opc" = "s" ]]; then
-	echo -e "\n\033[1;33m◇ Please Wait...\033[1;32m.\033[1;31m.\033[1;33m.\033[0m"
+	echo -e "\n\033[1;33m◇ รอสักครู่...\033[1;32m.\033[1;31m.\033[1;33m.\033[0m"
 		for user in $(cat /etc/passwd |awk -F : '$3 > 900 {print $1}' |grep -vi "nobody"); do
 			pkill -f $user > /dev/null 2>&1
 			deluser --force $user > /dev/null 2>&1
@@ -109,7 +109,7 @@ elif [[ "$resp" = "2" ]]; then
 		done
 		rm $HOME/usuarios.db && touch $HOME/usuarios.db
         rm *.zip > /dev/null 2>&1
-		echo -e "\n\033[1;32m◇SUCCESSFULLY REMOVED USERS!\033[0m"
+		echo -e "\n\033[1;32m◇ลบเรียบร้อยแล้ว!\033[0m"
 		sleep 2
 		menu
 	else
