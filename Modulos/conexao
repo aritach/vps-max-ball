@@ -1404,7 +1404,7 @@ exit 0' >$RCLOCAL
 			EOF
 			# gerar client.ovpn
 			newclient "VPSMANAGER"
-			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN SUCCESSFULLY INSTALLED\033[0m" || echo -e "\n\033[1;31mERROR ! THE INSTALLATION CORRUPTED\033[0m"
+			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mติดตั้ง OPENVPN สำเร็จ\033[0m" || echo -e "\n\033[1;31mERROR ! THE INSTALLATION CORRUPTED\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
